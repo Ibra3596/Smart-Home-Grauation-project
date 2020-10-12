@@ -4,7 +4,9 @@
  * Created: 10/7/2020 4:33:56 PM
  *  Author: Ibrahim
  */ 
+
 #include "SPI.h"
+
 
 void SPI_MasterInit(void)
 {	

@@ -83,7 +83,7 @@
 #define  UBRRL			(*(volatile uint8*)(0x29))
 
 /*********************************** SPI *******************************************/
-
+#define SPI_SPDR	(*(volatile uint8*)(0x2F))
 typedef struct
 {
 	uint8 SPR0 : 1;

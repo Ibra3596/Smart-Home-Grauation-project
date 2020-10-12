@@ -60,11 +60,13 @@ Discarded input sections
  .data          0x00000000        0x0 SPI.o
  .bss           0x00000000        0x0 SPI.o
  .text.SPI_MasterInit
-                0x00000000       0x32 SPI.o
+                0x00000000       0x3a SPI.o
  .text.SPI_InitTrans
                 0x00000000        0xa SPI.o
  .text.SPI_TermTrans
                 0x00000000        0xa SPI.o
+ .bss.SPI_TXData
+                0x00000000        0x1 SPI.o
  .text          0x00000000        0x0 Temprature_Sensor.o
  .data          0x00000000        0x0 Temprature_Sensor.o
  .bss           0x00000000        0x0 Temprature_Sensor.o
@@ -348,7 +350,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x71e
+.text           0x00000000      0x756
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -406,7 +408,6 @@ END GROUP
  *(.text)
  .text          0x00000078        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000078                __vector_1
-                0x00000078                __vector_12
                 0x00000078                __bad_interrupt
                 0x00000078                __vector_6
                 0x00000078                __vector_3
@@ -468,43 +469,46 @@ END GROUP
                 0x000004a2       0x3e main.o
                 0x000004a2                Control_fan
  .text.startup.main
-                0x000004e0       0x8e main.o
+                0x000004e0       0xa4 main.o
                 0x000004e0                main
  .text.SPI_SlaveInit
-                0x0000056e       0x38 SPI.o
-                0x0000056e                SPI_SlaveInit
+                0x00000584       0x40 SPI.o
+                0x00000584                SPI_SlaveInit
  .text.SPI_transive
-                0x000005a6        0xa SPI.o
-                0x000005a6                SPI_transive
+                0x000005c4        0x6 SPI.o
+                0x000005c4                SPI_transive
+ .text.__vector_12
+                0x000005ca       0x1e SPI.o
+                0x000005ca                __vector_12
  .text.Tempsensor_Init
-                0x000005b0        0x4 Temprature_Sensor.o
-                0x000005b0                Tempsensor_Init
+                0x000005e8        0x4 Temprature_Sensor.o
+                0x000005e8                Tempsensor_Init
  .text.Tempsensor_Read
-                0x000005b4        0x4 Temprature_Sensor.o
-                0x000005b4                Tempsensor_Read
+                0x000005ec        0x4 Temprature_Sensor.o
+                0x000005ec                Tempsensor_Read
  .text.__vector_11
-                0x000005b8       0xa4 Timer.o
-                0x000005b8                __vector_11
+                0x000005f0       0xa4 Timer.o
+                0x000005f0                __vector_11
  .text.__vector_7
-                0x0000065c       0x70 Timer.o
-                0x0000065c                __vector_7
+                0x00000694       0x70 Timer.o
+                0x00000694                __vector_7
  .text.PWM0_Init
-                0x000006cc        0xa Timer.o
-                0x000006cc                PWM0_Init
+                0x00000704        0xa Timer.o
+                0x00000704                PWM0_Init
  .text.PWM0_Generate
-                0x000006d6       0x14 Timer.o
-                0x000006d6                PWM0_Generate
+                0x0000070e       0x14 Timer.o
+                0x0000070e                PWM0_Generate
  .text.PWM0_Start
-                0x000006ea        0x8 Timer.o
-                0x000006ea                PWM0_Start
+                0x00000722        0x8 Timer.o
+                0x00000722                PWM0_Start
  .text.libgcc.div
-                0x000006f2       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x000006f2                __udivmodhi4
-                0x0000071a                . = ALIGN (0x2)
+                0x0000072a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000072a                __udivmodhi4
+                0x00000752                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000071a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000071a                _exit
-                0x0000071a                exit
+ .fini9         0x00000752        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000752                _exit
+                0x00000752                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -523,11 +527,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000071a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000752        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000071e                _etext = .
+                0x00000756                _etext = .
 
-.data           0x00800060        0x0 load address 0x0000071e
+.data           0x00800060        0x0 load address 0x00000756
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -539,33 +543,36 @@ END GROUP
                 0x00800060                _edata = .
                 [!provide]                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0xf
+.bss            0x00800060       0x10
                 0x00800060                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.value     0x00800060        0x2 ADC.o
                 0x00800060                value
+ .bss.SPI_RXData
+                0x00800062        0x1 SPI.o
+                0x00800062                SPI_RXData
  .bss.counter.1696
-                0x00800062        0x2 Timer.o
- .bss.cnt.1690  0x00800064        0x4 Timer.o
+                0x00800063        0x2 Timer.o
+ .bss.cnt.1690  0x00800065        0x4 Timer.o
  .bss.Number_OVRflows
-                0x00800068        0x4 Timer.o
-                0x00800068                Number_OVRflows
+                0x00800069        0x4 Timer.o
+                0x00800069                Number_OVRflows
  .bss.Init_Value
-                0x0080006c        0x1 Timer.o
-                0x0080006c                Init_Value
- .bss.ptr       0x0080006d        0x2 Timer.o
-                0x0080006d                ptr
+                0x0080006d        0x1 Timer.o
+                0x0080006d                Init_Value
+ .bss.ptr       0x0080006e        0x2 Timer.o
+                0x0080006e                ptr
  *(COMMON)
-                0x0080006f                PROVIDE (__bss_end, .)
-                0x0000071e                __data_load_start = LOADADDR (.data)
-                0x0000071e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800070                PROVIDE (__bss_end, .)
+                0x00000756                __data_load_start = LOADADDR (.data)
+                0x00000756                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080006f        0x0
+.noinit         0x00800070        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080006f                _end = .
+                0x00800070                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0

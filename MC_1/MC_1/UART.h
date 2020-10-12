@@ -11,6 +11,12 @@
 
 #include "DIO.h"
 
+#define UART_Interupt_Enable	1
+#define UART_Interupt_Disable   0
+
+#define UART_Interupt_State		UART_Interupt_Enable
+
+
 
 void UART_Init(void);
 

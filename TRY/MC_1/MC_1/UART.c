@@ -7,7 +7,10 @@
 
 
 #include "UART.h"
+#include <avr/interrupt.h>
 #define NULL ((void*)(0))
+
+uint8 volatile Rx_data = 0;
 
 void UART_Init(void)
 {
@@ -17,8 +20,16 @@ void UART_Init(void)
 	DIO_SetPinDir(DIO_PORTD , DIO_PIN1 , DIO_PIN_OUTPUT); // TX Pin set to output
 	
 	//Enable to read & transmission operation 
+	#if UART_Interupt_State == UART_Interupt_Enable
 	
-	UCSRB |= 0x18 ; // 00011000 bit 3 enable transmit , bit 4 enable read
+	UCSRB |= 0xD8 ; // 11011000 bit 3 enable transmit , bit 4 enable read , enable tx & Rx interrupt bit7,6
+	SREG  |= 0x80;
+	
+	#elif UART_Interupt_State == UART_Interupt_Disable
+	
+	UCSRB |= 0x18 ;
+	
+	#endif
 	
 	//selecting character size to 8 bits	
 	
@@ -63,4 +74,10 @@ uint8 UART_ReceiveByte(void)
 	data = UDR;
 	
 	return data;
+}
+
+
+ISR (USART_RXC_vect)
+{
+	Rx_data = UDR;
 }

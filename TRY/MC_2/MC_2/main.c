@@ -12,6 +12,8 @@
 #define F_CPU 8000000
 #include <util/delay.h>
 
+extern uint8 volatile SPI_RXData;
+
 int main(void)
 {
 	
@@ -35,38 +37,40 @@ int main(void)
 		Tempsensor_Read(&temp);
 		Control_fan( &temp);
 		
-		Received_Data = SPI_transive(Trans_Data);
+		//Received_Data = SPI_transive(Trans_Data);
+		//SPI_RXData =SPI_transive(Trans_Data);
+		 SPI_transive(Trans_Data);
 		
-		if (Received_Data)
+		if (SPI_RXData)
 		{
-			LCD_WriteData(Received_Data);
-			if (Received_Data == 'A')
+			LCD_WriteData(SPI_RXData);
+			if (SPI_RXData == 'A')
 			{
 				DIO_SetPinValue(DIO_PORTD , DIO_PIN5 , DIO_PIN_HIGH);
 			}
-			else if (Received_Data == 'a')
+			else if (SPI_RXData == 'a')
 			{
 				DIO_SetPinValue(DIO_PORTD , DIO_PIN5 , DIO_PIN_LOW);
 			}
 			
-			else if (Received_Data == 'B')
+			else if (SPI_RXData == 'B')
 			{
 				DC_Motor_SetDirection(CLOCKWISE);
 				DC_Motor_Start();
 			}
 			
-			else if (Received_Data == 'b')
+			else if (SPI_RXData == 'b')
 			{
 				DC_Motor_Stop();
 			}
 			
 			/*
-			else if (Received_Data == 'C')
+			else if (SPI_RXData == 'C')
 			{
 
 			}
 			
-			else if (Received_Data == 'c')
+			else if (SPI_RXData == 'c')
 			{
 
 			}

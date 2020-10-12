@@ -11,6 +11,11 @@
 
 #include "DIO.h"
 
+#define SPI_Interupt_Enable		1
+#define SPI_Interupt_Disable    0
+
+#define SPI_Interupt_State		SPI_Interupt_Enable
+
 void SPI_MasterInit(void);
 
 void SPI_SlaveInit(void);

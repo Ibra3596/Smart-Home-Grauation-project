@@ -10,9 +10,14 @@
 #define F_CPU 8000000
 #include <util/delay.h>
 
+extern uint8 volatile Rx_data;
+
+//extern uint8 volatile SPI_TXData;
+extern uint8 volatile SPI_RXData;
+
 int main(void)
 {
-	uint8 UART_data = 0 ;
+	uint8 UART_data = Rx_data ;
 	uint8 Received_Data = 0 ;
 	
 	UART_Init();
@@ -29,11 +34,22 @@ int main(void)
 	
 	while (1)
 	{
-		UART_data = UART_ReceiveByte();
+		//UART_data = UART_ReceiveByte();
+		if (Rx_data)
+		{
+			//UART_data = Rx_data;
+			
+			LCD_GoTo(0,0);
+			LCD_WriteData(Rx_data);
+			
+			//Received_Data = 
+			SPI_transive(Rx_data);	
+			
+			//Rx_data = 0;
+		}
 		
-		Received_Data = SPI_transive(UART_data);
 		
-		if (Received_Data == 1)
+		if (SPI_RXData == 1)
 		{
 			LCD_GoTo(1,0);
 			LCD_WriteData(UART_data);
@@ -43,15 +59,6 @@ int main(void)
 			
 			Received_Data = 0 ;
 		}
-		
-		if (UART_data)
-		{
-			LCD_GoTo(0,0);
-			LCD_WriteData(UART_data);
-			
-			UART_data = 0;
-		}
-		
 		
 		_delay_ms(1000);
 	}
