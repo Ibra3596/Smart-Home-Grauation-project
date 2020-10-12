@@ -11,8 +11,8 @@ void DC_Motor_Init(void)
 {
 	//initializing the two pins that control the direction to output 
 	
-	DIO_SetPinDir(DIO_PORTC , DIO_PIN3 , DIO_PIN_OUTPUT); // high in clockwise
-	DIO_SetPinDir(DIO_PORTC , DIO_PIN4 , DIO_PIN_OUTPUT); // low  in clockwise
+	DIO_SetPinDir(DIO_PORTC , DIO_PIN4 , DIO_PIN_OUTPUT); // high in clockwise
+	DIO_SetPinDir(DIO_PORTC , DIO_PIN5 , DIO_PIN_OUTPUT); // low  in clockwise
 	
 	PWM0_Init();
 }
@@ -22,13 +22,13 @@ void DC_Motor_SetDirection(DC_Motor_DIR dir)
 	switch(dir)
 	{
 		case CLOCKWISE :
-		DIO_SetPinValue(DIO_PORTC , DIO_PIN3 , DIO_PIN_HIGH);
-		DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_LOW);
+		DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_HIGH);
+		DIO_SetPinValue(DIO_PORTC , DIO_PIN5 , DIO_PIN_LOW);
 		break;
 		
 		case ANTI_CLOCKWISE:
-		DIO_SetPinValue(DIO_PORTC , DIO_PIN3 , DIO_PIN_LOW);
-		DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_HIGH);
+		DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_LOW);
+		DIO_SetPinValue(DIO_PORTC , DIO_PIN5 , DIO_PIN_HIGH);
 		break;
 		
 		default:
@@ -62,6 +62,6 @@ void DC_Motor_Stop(void)
 {
 	// setting the two direction pins to high to stop inertia 
 	
-	DIO_SetPinValue(DIO_PORTC , DIO_PIN3 , DIO_PIN_HIGH); 
-	DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_HIGH);
+	DIO_SetPinValue(DIO_PORTC , DIO_PIN4 , DIO_PIN_HIGH); 
+	DIO_SetPinValue(DIO_PORTC , DIO_PIN5 , DIO_PIN_HIGH);
 }

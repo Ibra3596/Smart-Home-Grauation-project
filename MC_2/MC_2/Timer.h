@@ -1,8 +1,8 @@
 /*
  * Timer.h
  *
- * Created: 21/08/2020 06:33:35 ã
- *  Author: Ali
+ * Created: 21/08/2020 06:33:35 PM
+ *  Author: Ibrahim
  */ 
 
 
@@ -27,7 +27,11 @@ void PWM0_Generate(uint16 Duty_Cycle);
 
 void PWM0_Start(void);
 
+void PWM1_Init(void);
 
+void PWM1_Generate(uint32 duty_cycle);
+
+void PWM1_Start(void);
 
 void Set_CallBack(void(*p)(void));
 

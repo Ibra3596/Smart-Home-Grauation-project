@@ -8,6 +8,7 @@
 #include "SPI.h"
 #include "DC_Motor.h"
 #include "Temprature_Sensor.h"
+#include "Servo.h"
 
 #define F_CPU 8000000
 #include <util/delay.h>
@@ -18,14 +19,14 @@ int main(void)
 	uint8 Received_Data = 0 ;
 	uint8 Trans_Data = 1;
 	
-	DIO_SetPinDir(DIO_PORTD ,DIO_PIN5 , DIO_PIN_OUTPUT);
+	DIO_SetPinDir(DIO_PORTD ,DIO_PIN6 , DIO_PIN_OUTPUT);
 	
 	LCD_Init();
 	
 	uint16 temp = 0;
 	Tempsensor_Init();
 	DC_Motor_Init();
-
+	Servo_Init();
 	
 	SPI_SlaveInit();
 	
@@ -42,11 +43,11 @@ int main(void)
 			LCD_WriteData(Received_Data);
 			if (Received_Data == 'A')
 			{
-				DIO_SetPinValue(DIO_PORTD , DIO_PIN5 , DIO_PIN_HIGH);
+				DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_HIGH);
 			}
 			else if (Received_Data == 'a')
 			{
-				DIO_SetPinValue(DIO_PORTD , DIO_PIN5 , DIO_PIN_LOW);
+				DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_LOW);
 			}
 			
 			else if (Received_Data == 'B')
@@ -60,17 +61,17 @@ int main(void)
 				DC_Motor_Stop();
 			}
 			
-			/*
+			
 			else if (Received_Data == 'C')
 			{
-
+				Servo_Move(90);
 			}
 			
 			else if (Received_Data == 'c')
 			{
-
+				Servo_Move(0);
 			}
-			*/
+			
 			
 			Received_Data = 0;
 			

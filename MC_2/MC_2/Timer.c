@@ -1,8 +1,8 @@
 /*
- * CFile1.c
+ * Timer.c
  *
- * Created: 21/08/2020 06:33:49 ã
- *  Author: Ali
+ * Created: 21/08/2020 06:33:49 PM
+ *  Author: Ibrahim
  */ 
 
 
@@ -162,5 +162,37 @@ void PWM0_Start(void)
 {
 	
 	TCCR0 |= 0x01 ;
+	
+}
+
+void PWM1_Init(void)
+{
+	//setting port D pin5 direction to output
+	
+	DDRD |= 0x20;
+	
+	//selecting timer1 pwm mode 14 (fast pwm , controllable top(OCR1))
+	
+	TCCR1A |= 0x82; // setting bit 0 , bit 1 , bit 7    10000010	0x02
+	TCCR1B |= 0x1c; // setting bit 2 , bit 3 , bit4	    00011100	0x18
+	
+	//assigning the value needed to achieve Frequency of generated wave of 50hz to ICR1
+	
+	ICR1 = 625; //1250 with 4m oscilator with clk/128 pre scaller ; 625 if in simulation 8m osclator
+}
+
+
+void PWM1_Generate(uint32 duty_cycle)
+{
+	// Duty Cycle = (OCR1A +1 / Top ) * 100
+	
+	OCR1A  = ((duty_cycle * 625) /100) -1 ;
+}
+
+void PWM1_Start(void)
+{
+	//giving clk access by selecting a presc
+	
+	TCCR1B |= 0x04 ; // bit 0, bit 1 , bit 3 of TCCR1B set to 1,0,0 to select presc 256
 	
 }

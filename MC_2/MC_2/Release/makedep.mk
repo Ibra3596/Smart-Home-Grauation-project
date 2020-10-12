@@ -12,6 +12,8 @@ LCD.c
 
 main.c
 
+Servo.c
+
 SPI.c
 
 Temprature_Sensor.c
