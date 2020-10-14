@@ -7,7 +7,7 @@
 #include "ADC.h"
 #include <avr/interrupt.h>
 
-volatile uint16 value = 0;
+volatile uint16 ADC_value = 0;
 
 void ADC_Init(void)
 {
@@ -146,5 +146,5 @@ void ADC_Read(uint16* value)
 
 ISR(ADC_vect)
 {
-	value = ((ADC_Adjust * 500) / 1024);
+	ADC_value = ((ADC_Adjust * 500) / 1024);
 }

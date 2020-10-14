@@ -13,6 +13,8 @@
 #define F_CPU 8000000
 #include <util/delay.h>
 
+extern uint16 ADC_value;
+
 int main(void)
 {
 	
@@ -34,44 +36,42 @@ int main(void)
 	while (1)
 	{
 		Tempsensor_Read(&temp);
-		Control_fan( &temp);
+		Control_fan( &ADC_value);
 		
 		Received_Data = SPI_transive(Trans_Data);
 		
 		if (Received_Data)
 		{
-			LCD_WriteData(Received_Data);
-			if (Received_Data == 'A')
-			{
-				DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_HIGH);
-			}
-			else if (Received_Data == 'a')
-			{
-				DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_LOW);
-			}
+			switch(Received_Data)
+		{
+			case  'A':
+			DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_HIGH);
+			break;
 			
-			else if (Received_Data == 'B')
-			{
-				DC_Motor_SetDirection(CLOCKWISE);
-				DC_Motor_Start();
-			}
+			case  'a':
+			DIO_SetPinValue(DIO_PORTD , DIO_PIN6 , DIO_PIN_LOW);
+			break;
 			
-			else if (Received_Data == 'b')
-			{
-				DC_Motor_Stop();
-			}
+			case  'B':
+			DC_Motor_SetDirection(CLOCKWISE);
+			DC_Motor_Start();
+			break;
 			
+			case  'b':
+			DC_Motor_Stop();
+			break;
 			
-			else if (Received_Data == 'C')
-			{
-				Servo_Move(90);
-			}
+			case  'C':
+			Servo_Move(90);
+			break;
 			
-			else if (Received_Data == 'c')
-			{
-				Servo_Move(0);
-			}
+			case  'c':
+			Servo_Move(0);
+			break;
 			
+			default:
+			break;
+		}
 			
 			Received_Data = 0;
 			
